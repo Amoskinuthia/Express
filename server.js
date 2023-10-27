@@ -5,9 +5,12 @@ const app = express();
 const port = 4000;
 const userRoutes = require("./routes/userRoutes.js");
 const {errorHandler, notfound} = require("./middleware/errorMiddleWare.js");
-
+//bring in the database connection
+const connectDB = require('./config/db.js');
 
 app.use('/api/users', userRoutes);
+// Connect to the database
+connectDB();
 
 // Define routes
 app.get('/', (req, res) => {

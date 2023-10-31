@@ -8,6 +8,7 @@ const {
     getUserProfile,
     updateUserProfile,
  } = require('../controllers/userController.js'); // Import the authUser function from the controller
+const  protect= require('../middleware/authMiddleware.js'); // Import the protect function from the middleware
 
 router.post("/auth", authUser); // Use the authUser function as the route handler
 
@@ -17,9 +18,7 @@ router.post("/login", loginUser);
 
 router.post("/logout", logoutUser);
 
-router.get("/profile", getUserProfile);
-
-router.put("/profile", updateUserProfile);
+router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
 
 
 module.exports = router;

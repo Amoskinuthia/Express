@@ -1,18 +1,19 @@
-const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 
-// Replace the database URL with your own
-const dbURI = 'mongodb+srv://Amoskinuthia:Vcfnw0rot51Ui5mj@cluster0.m2v3tkt.mongodb.net/express?retryWrites=true&w=majority'
+const mongoose = require('mongoose');
+const mongo = require('mongoose');
 
 const connectDB = async () => {
-    try {
-        await mongoose.connect(dbURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('MongoDB connection success');
-    } catch (err) {
-        console.error(err.message);
-        process.exit(1);
-    }
-}
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connection success');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 module.exports = connectDB;
